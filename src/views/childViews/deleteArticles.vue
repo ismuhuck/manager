@@ -5,7 +5,7 @@
       :data="tableData.filter(data => !search || data.nickName.toLowerCase().includes(search.toLowerCase()))"
       style="width: 100%"
     >
-      <el-table-column prop="createTime" label="发布日期" width="180"></el-table-column>
+      <el-table-column prop="createTime" label="发布日期" :formatter="formatter" width="180"></el-table-column>
       <el-table-column prop="nickName" label="发布人" width="100" align="center"></el-table-column>
       <el-table-column prop="title" label="文章标题" width="280" align="center"></el-table-column>
       <el-table-column align="right">
@@ -55,6 +55,7 @@
   </div>
 </template>
 <script>
+import formatTime from '../../../utils/util'
 export default {
   data() {
     return {
@@ -72,6 +73,9 @@ export default {
     };
   },
   methods: {
+    formatter(row, column){
+       return formatTime("YYYY-mm-dd HH:MM",new Date(parseInt(row.createTime)))
+    },
     handleClose(done) {
       done();
     },
