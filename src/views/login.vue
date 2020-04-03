@@ -23,6 +23,7 @@
           <el-form-item>
             <el-button type="warning" @click="submitForm('loginForm')" plain>提交</el-button>
             <el-button type="info" @click="resetForm('loginForm')" plain>重置</el-button>
+            <el-button type="info" @click="register" plain>注册</el-button>
           </el-form-item>
         </el-form>
     </div>
@@ -49,6 +50,9 @@ export default {
       };
     },
     methods: {
+      register(){
+        this.$router.push('/adminRegister')
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -58,14 +62,12 @@ export default {
               })
               .then( res => {
                   const {data:result} = res
-                  console.log(result)
                   if(result.code === 1){
                       return this.$message.error('用户名或密码错误')
                   }
                   if(result.code === 0){
                       let userToken = "Bearer " + result.token;
-                      localStorage.setItem('Authorization',userToken)
-                      console.log(result.admin)
+                      sessionStorage.setItem('Authorization',userToken)
                       sessionStorage.setItem('userName',result.admin)
                       this.$router.push('/')
                       this.$message.success('登录成功')

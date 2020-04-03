@@ -90,7 +90,7 @@ export default {
       this.items[index].show = !this.items[index].show
     },
     exit(){
-      localStorage.removeItem('Authorization')
+      sessionStorage.removeItem('Authorization')
       this.$router.push('/login')
     },
     init(){

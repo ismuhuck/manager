@@ -4,10 +4,14 @@
   <el-table
     :data="tableData.filter(data => !search || data.nickName.toLowerCase().includes(search.toLowerCase()))"
     style="width: 100%">
-     <el-table-column prop="createTime" label="发布日期" :formatter="formatter" width="180"></el-table-column>
-      <el-table-column prop="nickName" label="发布人" width="100" align="center"></el-table-column>
-      <el-table-column prop="title" label="文章标题" width="280" align="center">
-      </el-table-column>
+    <el-table-column prop="createTime" 
+    label="发布日期" 
+    :formatter="formatter" width="180"></el-table-column>
+    <el-table-column prop="nickName" 
+    label="发布人" width="100" align="center"></el-table-column>
+    <el-table-column prop="title" 
+    label="文章标题" width="280" align="center">
+    </el-table-column>
     <el-table-column
       align="right">
       <template slot="header" slot-scope="scope">
@@ -19,8 +23,10 @@
       <template slot-scope="scope">
         <el-button
           size="mini"
-          @click="handleEdit(scope.$index, scope.row)">文章详情</el-button>
-        <el-button size="mini" type="danger" @click="showstop(scope.$index,scope.row)">
+          @click="handleEdit(scope.$index, scope.row)">
+          文章详情</el-button>
+        <el-button size="mini" type="danger"
+         @click="showstop(scope.$index,scope.row)">
           暂停展示
         </el-button>
         <el-button

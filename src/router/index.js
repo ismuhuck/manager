@@ -10,8 +10,12 @@ const routes = [
   //   component: Home
   // },
   {
+    path:'/adminRegister',
+    component: () => import('../views/adminRegister.vue')
+  },
+  {
     path: '/login',
-    component:() => import('../views//login.vue')
+    component:() => import('../views/login.vue')
   },
   {
     path: '/',
@@ -92,9 +96,19 @@ const router = new VueRouter({
 
 router.beforeEach((to,from,next) =>{
   if(to.path != '/login'){
-    let token = localStorage.getItem('Authorization')
+    let token = sessionStorage.getItem('Authorization')
     if(!token){
-      next('/login')
+      // console.log(to.path)
+      // if(to.path === '/adminRegister'){
+      //  return next('/adminRegister')
+      // }
+      if(to.path !== '/adminRegister'){
+        next('/login')
+      }
+      else{
+        next()
+      }
+      
     }
     else{
       next()
